@@ -8656,3 +8656,37 @@ display:none!important
 }
 }
 
+/* =============Added by Panagis============ */
+#edit-profile-main-field-personal-details {
+	margin-top:50px;
+}
+
+#edit-picture {
+	margin-top:50px;
+	margin-bottom:50px;
+}
+
+.panel-pane {
+	margin-bottom:50px;
+}
+
+.rounded-corner {
+	margin-bottom:50px;
+}
+
+.page-solr-search .node {
+	margin-bottom:30px !important;
+	padding:10px !important;
+	border-radius: 10px;
+	background-color: #eee !important;
+}
+
+.page-solr-search .form-text {
+	width:70% !important;
+}
+
+.page-solr-search .form-actions {
+	float: left !important;
+	display:block !important;
+}
+
