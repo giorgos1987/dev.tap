@@ -135,6 +135,11 @@ function search_log_form_alter(&$form, &$form_state, $form_id) {
 function search_log_search_form_submit($form, &$form_state) {
   $module = isset($form_state['values']['module']) ? $form_state['values']['module'] : NULL;
   $keys = isset($form_state['values']['processed_keys']) ? $form_state['values']['processed_keys'] : NULL;
+
+$keys = str_replace("*","",$keys);
+  $keys = str_replace("%2A","",$keys);
+
+
   if ($keys) {
     _search_log_preprocess_search_form($form_state['values'], $keys, $module);
   }
@@ -222,7 +227,7 @@ function _search_log_preprocess_search_form($submitted, $keys, $module = NULL) {
 function search_log($keys, $module, $language = 'en', $counter = 1, $result = SEARCH_LOG_RESULT_UNKNOWN) {
   $today = _search_log_get_time();
   $keys = _search_log_normalize_keys($keys);
-  if (!$keys || !$module|| !$language) return;
+  if (!$keys || !$module|| !$language || (strpos( $keys,'%2A')  !== false  && strpos( $keys,'*')  !== false)) return;
 
   // If search_log_preproces is enabled, the default is successful search.
   if (!$result && variable_get('search_log_preprocess', TRUE)) {
@@ -288,8 +293,9 @@ function search_log_preprocess_search_results(&$variables) {
  */
 function _search_log_normalize_keys($keys) {
   $keys = preg_replace('/\s+/', ' ', trim($keys));
-
-  switch (variable_get('search_log_terms', SEARCH_LOG_TERMS_LOWERCASE)) {
+  $keys = str_replace("*","",$keys);
+  $keys = str_replace("%2A","",$keys); 
+ switch (variable_get('search_log_terms', SEARCH_LOG_TERMS_LOWERCASE)) {
     case SEARCH_LOG_TERMS_LOWERCASE:
       $keys = str_replace(' or ', ' OR ', drupal_strtolower($keys));
       break;
