@@ -28,8 +28,8 @@
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
     <<?php print $title_heading; ?><?php print $title_attributes; ?>>
-      <?php print $title; ?>
-    </<?php print $title_heading; ?>>
+      <?php print  htmlspecialchars_decode($title); ?>
+    </<?php print  htmlspecialchars_decode($title_heading); ?>>
   <?php endif; ?>
   <?php print render($title_suffix); ?>
 
